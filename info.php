@@ -1,12 +1,7 @@
 <?php
- $dbhost = "localhost";
- $dbuser = "root";
- $dbpass = "root";
- $db = "sample";
- $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
- echo "done";
+$con = new PDO('mysql:host=localhost;dbname=sample' ,'root' ,'root');
 $stat = $conn->query('select name form details');
-foreach($statement as $row)
+foreach($stat as $row)
 {
 echo $row['name']
 }
