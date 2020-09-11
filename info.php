@@ -1,18 +1,27 @@
 
 <?php
- $dbhost = "localhost";
- $dbuser = "root";
- $dbpass = "root";
- $db = "sample";
-$conn = mysqli_connect($servername, $username, $password, $database);
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "sample";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 if ($conn->connect_error) {
-die("Connection failed: " . $conn->connect_error);
+  die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
-$sql = "select id, name from details";
+
+$sql = "SELECT id, name FROM details";
 $result = $conn->query($sql);
-while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " ". "<br>";
+
+if ($result->num_rows > 0) {
+  
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["id"]. " - Name: " . $row["name"]. "<br>";
   }
-mysqli_close($conn);
+} else {
+  echo "0 results";
+}
+$conn->close();
 ?>
